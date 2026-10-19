@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Устройства — Smart Campus AI</title>
+  <script>try { if (JSON.parse(localStorage.getItem("sc_theme")) === "light") document.documentElement.classList.add("light"); } catch (e) {}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="devices">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main">
+      <header class="topbar" id="topbar"></header>
+      <main class="content">
+        <div class="page-head">
+          <div>
+            <h1>IoT-устройства</h1>
+            <p>Датчики температуры, CO₂, счётчики энергии, камеры и контроль доступа</p>
+          </div>
+        </div>
+
+        <section class="kpi-grid" id="deviceKpi"></section>
+
+        <div class="toolbar">
+          <label class="search"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="search" id="deviceSearch" placeholder="Поиск: TEMP-A101, B-204…" aria-label="Поиск устройств"></label>
+          <select class="field" id="typeFilter" aria-label="Тип устройства"><option value="">Все типы</option></select>
+          <select class="field" id="deviceStatusFilter" aria-label="Статус">
+            <option value="">Online и Offline</option>
+            <option value="online">Online</option>
+            <option value="offline">Offline</option>
+          </select>
+          <span class="result-count" id="deviceCount"></span>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Sensor ID</th><th>Помещение</th><th>Тип</th><th>Значение</th><th>Статус</th><th>Последнее обновление</th><th>Действие</th></tr></thead>
+            <tbody id="devicesBody"></tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/ai.js"></script>
+  <script src="assets/js/simulation.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/devices.js"></script>
+</body>
+</html>

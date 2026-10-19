@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Smart Campus AI</title>
+  <script>try { if (JSON.parse(localStorage.getItem("sc_theme")) === "light") document.documentElement.classList.add("light"); } catch (e) {}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="dashboard">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main">
+      <header class="topbar" id="topbar"></header>
+      <main class="content">
+        <div class="page-head">
+          <div>
+            <h1>Dashboard</h1>
+            <p id="campusLine">Состояние кампуса в реальном времени</p>
+          </div>
+          <div class="head-actions">
+            <span class="live" id="liveStatus">Обновление…</span>
+            <button class="btn ghost" id="simulateBtn" type="button"></button>
+          </div>
+        </div>
+
+        <section class="kpi-grid" id="kpiGrid" aria-label="Ключевые показатели"></section>
+
+        <div class="grid-3">
+          <section class="card">
+            <div class="card-head"><h2>Энергопотребление по корпусам</h2><span>кВт·ч, текущий час</span></div>
+            <div class="chart-box"><canvas id="energyChart" aria-label="Энергопотребление по корпусам"></canvas></div>
+          </section>
+          <section class="card">
+            <div class="card-head"><h2>Статус устройств</h2><span id="deviceStatusNote"></span></div>
+            <div class="chart-box"><canvas id="deviceChart" aria-label="Статус устройств"></canvas></div>
+          </section>
+        </div>
+
+        <section class="card" style="margin-bottom:16px">
+          <div class="card-head"><h2>Средняя температура и CO₂ по кампусу</h2><span>последние замеры</span></div>
+          <div class="chart-box"><canvas id="tempChart" aria-label="Тренд температуры"></canvas></div>
+        </section>
+
+        <div class="grid-2">
+          <section class="card">
+            <div class="card-head"><h2>Уведомления</h2><a href="analytics.html">AI Analytics →</a></div>
+            <div class="alert-list" id="alertList"></div>
+          </section>
+          <section class="card">
+            <div class="card-head"><h2>Помещения, требующие внимания</h2><a href="rooms.html">Все помещения →</a></div>
+            <div class="table-wrap"><table>
+              <thead><tr><th>Помещение</th><th>Темп.</th><th>CO₂</th><th>Энергия</th><th>Статус</th></tr></thead>
+              <tbody id="attentionBody"></tbody>
+            </table></div>
+          </section>
+        </div>
+
+        <section class="card">
+          <div class="card-head"><h2>Последние инциденты</h2><a href="incidents.html">Все инциденты →</a></div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>#</th><th>Название</th><th>Помещение</th><th>Приоритет</th><th>Статус</th></tr></thead>
+            <tbody id="recentIncidents"></tbody>
+          </table></div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/ai.js"></script>
+  <script src="assets/js/simulation.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/dashboard.js"></script>
+</body>
+</html>

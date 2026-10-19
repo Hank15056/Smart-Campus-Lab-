@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Инциденты — Smart Campus AI</title>
+  <script>try { if (JSON.parse(localStorage.getItem("sc_theme")) === "light") document.documentElement.classList.add("light"); } catch (e) {}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="incidents">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main">
+      <header class="topbar" id="topbar"></header>
+      <main class="content">
+        <div class="page-head">
+          <div>
+            <h1>Инциденты и заявки</h1>
+            <p>Учёт неисправностей: приоритет, ответственный, статус выполнения</p>
+          </div>
+          <div class="head-actions">
+            <button class="btn" id="addIncidentBtn" type="button"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> Новый инцидент</button>
+          </div>
+        </div>
+
+        <section class="kpi-grid" id="incidentKpi"></section>
+
+        <div class="toolbar">
+          <label class="search"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="search" id="incidentSearch" placeholder="Поиск по названию, помещению, ответственному…" aria-label="Поиск инцидентов"></label>
+          <select class="field" id="incStatusFilter" aria-label="Статус">
+            <option value="">Все статусы</option>
+            <option value="open">Открыт</option>
+            <option value="in_progress">В работе</option>
+            <option value="resolved">Решён</option>
+          </select>
+          <select class="field" id="priorityFilter" aria-label="Приоритет">
+            <option value="">Все приоритеты</option>
+            <option value="high">Высокий</option>
+            <option value="medium">Средний</option>
+            <option value="low">Низкий</option>
+          </select>
+          <span class="result-count" id="incidentCount"></span>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>#</th><th>Название</th><th>Помещение</th><th>Приоритет</th><th>Статус</th><th>Ответственный</th><th>Создан</th><th>Действия</th></tr></thead>
+            <tbody id="incidentsBody"></tbody>
+          </table>
+        </div>
+        <p class="muted" style="font-size:13px" id="roleHint"></p>
+
+        <dialog class="modal" id="incidentModal" aria-labelledby="incidentModalTitle">
+          <form id="incidentForm" novalidate>
+            <div class="modal-head">
+              <h2 id="incidentModalTitle">Новый инцидент</h2>
+              <button class="icon-btn" type="button" id="closeModal" aria-label="Закрыть"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+            </div>
+            <div class="modal-body">
+              <div class="form-grid">
+                <label class="lbl full">Название *
+                  <input class="field" name="title" maxlength="80" placeholder="Например: не работает проектор" required>
+                </label>
+                <label class="lbl">Помещение *
+                  <select class="field" name="room" required></select>
+                </label>
+                <label class="lbl">Приоритет
+                  <select class="field" name="priority">
+                    <option value="low">Низкий</option>
+                    <option value="medium" selected>Средний</option>
+                    <option value="high">Высокий</option>
+                  </select>
+                </label>
+                <label class="lbl">Статус
+                  <select class="field" name="status">
+                    <option value="open">Открыт</option>
+                    <option value="in_progress">В работе</option>
+                    <option value="resolved">Решён</option>
+                  </select>
+                </label>
+                <label class="lbl">Ответственный *
+                  <input class="field" name="assignee" maxlength="60" placeholder="ФИО и должность" required>
+                </label>
+                <label class="lbl full">Комментарий
+                  <textarea class="field" name="comment" maxlength="300" placeholder="Подробности, что уже сделано"></textarea>
+                </label>
+              </div>
+              <div class="error-text" id="formError" role="alert"></div>
+            </div>
+            <div class="modal-foot">
+              <button class="btn ghost" type="button" id="cancelModal">Отмена</button>
+              <button class="btn" type="submit" id="saveIncident">Сохранить</button>
+            </div>
+          </form>
+        </dialog>
+      </main>
+    </div>
+  </div>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/ai.js"></script>
+  <script src="assets/js/simulation.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/incidents.js"></script>
+</body>
+</html>

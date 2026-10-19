@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вход — Smart Campus AI</title>
+  <script>try { if (JSON.parse(localStorage.getItem("sc_theme")) === "light") document.documentElement.classList.add("light"); } catch (e) {}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="login-page">
+    <section class="login-hero">
+      <div class="brand" style="padding:0">
+        <span class="brand-logo" id="heroLogo"></span>
+        <span><b>Smart Campus AI</b><small>Интеллектуальная платформа кампуса</small></span>
+      </div>
+
+      <div>
+        <h1>Вся инфраструктура кампуса на одном экране</h1>
+        <p>Мониторинг аудиторий и IoT-датчиков, учёт энергопотребления, заявки на ремонт и AI-модуль, который находит аномалии и подсказывает, что делать.</p>
+        <div class="hero-points" id="heroPoints"></div>
+      </div>
+
+      <p class="muted" style="font-size:13px;margin:0">Учебный проект · Павлов А.С., группа КС 3-24 · 2026</p>
+    </section>
+
+    <section class="login-form-side">
+      <div class="login-card">
+        <h2>Вход в систему</h2>
+        <p class="muted" style="margin:0">Выберите роль, чтобы посмотреть разные уровни доступа.</p>
+
+        <form id="loginForm" novalidate>
+          <label class="lbl">Email
+            <input class="field" type="email" name="email" placeholder="operator@campus.kg" autocomplete="username" required>
+          </label>
+          <label class="lbl">Пароль
+            <input class="field" type="password" name="password" placeholder="Не меньше 4 символов" autocomplete="current-password" required>
+          </label>
+          <label class="lbl">Роль
+            <select class="field" name="role">
+              <option value="Administrator">Administrator — полный доступ</option>
+              <option value="Engineer">Engineer — изменение заявок</option>
+              <option value="Operator">Operator — просмотр и создание заявок</option>
+            </select>
+          </label>
+          <div class="error-text" id="loginError" role="alert"></div>
+          <button class="btn" type="submit">Войти</button>
+          <button class="btn ghost" type="button" id="demoBtn">Демо-вход (Administrator)</button>
+        </form>
+
+        <p class="note" style="margin-top:18px">Это учебная имитация входа: пароль не проверяется на сервере и не защищает данные. Роль влияет только на доступные кнопки в интерфейсе.</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/login.js"></script>
+</body>
+</html>

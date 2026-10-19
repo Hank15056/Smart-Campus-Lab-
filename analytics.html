@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Analytics — Smart Campus AI</title>
+  <script>try { if (JSON.parse(localStorage.getItem("sc_theme")) === "light") document.documentElement.classList.add("light"); } catch (e) {}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="analytics">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main">
+      <header class="topbar" id="topbar"></header>
+      <main class="content">
+        <div class="page-head">
+          <div>
+            <h1>AI Analytics</h1>
+            <p>Обнаружение аномалий по порогам и z-score, рекомендации оператору</p>
+          </div>
+          <div class="head-actions">
+            <span class="live" id="liveStatus">Обновление…</span>
+            <button class="btn" id="analyzeBtn" type="button"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></svg> Новые показания и анализ</button>
+          </div>
+        </div>
+
+        <section class="kpi-grid" id="aiKpi"></section>
+
+        <div class="grid-3">
+          <section class="card">
+            <div class="card-head"><h2>Обнаруженные аномалии</h2><span id="anomalyNote"></span></div>
+            <div class="toolbar" style="margin-bottom:12px">
+              <select class="field" id="riskFilter" aria-label="Уровень риска">
+                <option value="">Все уровни риска</option>
+                <option value="critical">Высокий</option>
+                <option value="warning">Средний</option>
+                <option value="low">Низкий (только z-score)</option>
+              </select>
+            </div>
+            <div class="stack" id="anomalyList"></div>
+          </section>
+
+          <div class="stack" style="align-content:start">
+            <section class="card">
+              <div class="card-head"><h2>Как работает анализ</h2></div>
+              <p style="margin:0 0 10px">1. <b>Пороги.</b> Каждый показатель сравнивается с нормой:</p>
+              <div class="table-wrap"><table class="legend-table">
+                <thead><tr><th>Параметр</th><th>Normal</th><th>Warning</th><th>Critical</th></tr></thead>
+                <tbody>
+                  <tr><td>Температура</td><td>18–27 °C</td><td>28–31 °C</td><td>≥32 °C</td></tr>
+                  <tr><td>CO₂</td><td>&lt;1000</td><td>1000–1499</td><td>≥1500</td></tr>
+                  <tr><td>Энергия</td><td>база</td><td>+30%</td><td>+60%</td></tr>
+                </tbody>
+              </table></div>
+              <p style="margin:14px 0 0">2. <b>Z-score.</b> Текущее значение сравнивается со средним μ и отклонением σ прошлых замеров:</p>
+              <div class="formula">z = |x − μ| / σ, аномалия при z &gt; <span id="zLimit">2</span></div>
+              <p class="muted" style="margin:0;font-size:13px">Так находятся резкие скачки, даже если порог ещё не превышен.</p>
+              <p style="margin:14px 0 0">3. <b>Рекомендации.</b> Для каждой аномалии правило подбирает действие для оператора.</p>
+            </section>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <section class="card">
+            <div class="card-head"><h2>CO₂ по помещениям</h2><span>ppm, цвет — уровень</span></div>
+            <div class="chart-box tall"><canvas id="co2Chart" aria-label="CO2 по помещениям"></canvas></div>
+          </section>
+          <section class="card">
+            <div class="card-head">
+              <h2>История температуры</h2>
+              <select class="field" id="roomSelect" aria-label="Помещение" style="padding:6px 10px"></select>
+            </div>
+            <div class="chart-box tall"><canvas id="historyChart" aria-label="История температуры"></canvas></div>
+          </section>
+        </div>
+
+        <section class="card">
+          <div class="card-head"><h2>Энергия: факт и базовая линия</h2><span>кВт·ч по корпусам</span></div>
+          <div class="chart-box"><canvas id="baselineChart" aria-label="Энергия и базовая линия"></canvas></div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/ai.js"></script>
+  <script src="assets/js/simulation.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/analytics.js"></script>
+</body>
+</html>

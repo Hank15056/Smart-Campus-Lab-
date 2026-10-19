@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Помещения — Smart Campus AI</title>
+  <script>try { if (JSON.parse(localStorage.getItem("sc_theme")) === "light") document.documentElement.classList.add("light"); } catch (e) {}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="rooms">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main">
+      <header class="topbar" id="topbar"></header>
+      <main class="content">
+        <div class="page-head">
+          <div>
+            <h1>Помещения</h1>
+            <p>Аудитории, лаборатории и служебные помещения с показаниями датчиков</p>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <label class="search"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="search" id="roomSearch" placeholder="Поиск: A-101, серверная, корпус B…" aria-label="Поиск помещений"></label>
+          <select class="field" id="buildingFilter" aria-label="Корпус"><option value="">Все корпуса</option></select>
+          <select class="field" id="statusFilter" aria-label="Статус">
+            <option value="">Все статусы</option>
+            <option value="normal">Normal</option>
+            <option value="warning">Warning</option>
+            <option value="critical">Critical</option>
+          </select>
+          <span class="result-count" id="roomCount"></span>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>ID</th><th>Корпус</th><th>Этаж</th><th>Тип</th><th>Температура</th><th>CO₂</th><th>Энергия</th><th>Занятость</th><th>Статус</th></tr></thead>
+            <tbody id="roomsBody"></tbody>
+          </table>
+        </div>
+        <p class="muted" style="font-size:13px">Пороги: температура 18–27 °C — норма, ≥32 °C — критично; CO₂ ≥1000 ppm — внимание, ≥1500 ppm — критично; энергия +30% / +60% к базовой линии.</p>
+      </main>
+    </div>
+  </div>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/ai.js"></script>
+  <script src="assets/js/simulation.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/rooms.js"></script>
+</body>
+</html>
